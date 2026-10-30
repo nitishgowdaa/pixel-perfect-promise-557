@@ -10,33 +10,102 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BatteryRouteImport } from './routes/battery'
+import { Route as EnergyFlowRouteImport } from './routes/energy-flow'
+import { Route as GeothermalRouteImport } from './routes/geothermal'
+import { Route as PredictionsRouteImport } from './routes/predictions'
+import { Route as SolarRouteImport } from './routes/solar'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BatteryRoute = BatteryRouteImport.update({
+  id: '/battery',
+  path: '/battery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnergyFlowRoute = EnergyFlowRouteImport.update({
+  id: '/energy-flow',
+  path: '/energy-flow',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GeothermalRoute = GeothermalRouteImport.update({
+  id: '/geothermal',
+  path: '/geothermal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PredictionsRoute = PredictionsRouteImport.update({
+  id: '/predictions',
+  path: '/predictions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SolarRoute = SolarRouteImport.update({
+  id: '/solar',
+  path: '/solar',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/battery': typeof BatteryRoute
+  '/energy-flow': typeof EnergyFlowRoute
+  '/geothermal': typeof GeothermalRoute
+  '/predictions': typeof PredictionsRoute
+  '/solar': typeof SolarRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/battery': typeof BatteryRoute
+  '/energy-flow': typeof EnergyFlowRoute
+  '/geothermal': typeof GeothermalRoute
+  '/predictions': typeof PredictionsRoute
+  '/solar': typeof SolarRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/battery': typeof BatteryRoute
+  '/energy-flow': typeof EnergyFlowRoute
+  '/geothermal': typeof GeothermalRoute
+  '/predictions': typeof PredictionsRoute
+  '/solar': typeof SolarRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/battery'
+    | '/energy-flow'
+    | '/geothermal'
+    | '/predictions'
+    | '/solar'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/battery'
+    | '/energy-flow'
+    | '/geothermal'
+    | '/predictions'
+    | '/solar'
+  id:
+    | '__root__'
+    | '/'
+    | '/battery'
+    | '/energy-flow'
+    | '/geothermal'
+    | '/predictions'
+    | '/solar'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BatteryRoute: typeof BatteryRoute
+  EnergyFlowRoute: typeof EnergyFlowRoute
+  GeothermalRoute: typeof GeothermalRoute
+  PredictionsRoute: typeof PredictionsRoute
+  SolarRoute: typeof SolarRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +117,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/battery': {
+      id: '/battery'
+      path: '/battery'
+      fullPath: '/battery'
+      preLoaderRoute: typeof BatteryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/energy-flow': {
+      id: '/energy-flow'
+      path: '/energy-flow'
+      fullPath: '/energy-flow'
+      preLoaderRoute: typeof EnergyFlowRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/geothermal': {
+      id: '/geothermal'
+      path: '/geothermal'
+      fullPath: '/geothermal'
+      preLoaderRoute: typeof GeothermalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/predictions': {
+      id: '/predictions'
+      path: '/predictions'
+      fullPath: '/predictions'
+      preLoaderRoute: typeof PredictionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/solar': {
+      id: '/solar'
+      path: '/solar'
+      fullPath: '/solar'
+      preLoaderRoute: typeof SolarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BatteryRoute: BatteryRoute,
+  EnergyFlowRoute: EnergyFlowRoute,
+  GeothermalRoute: GeothermalRoute,
+  PredictionsRoute: PredictionsRoute,
+  SolarRoute: SolarRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
