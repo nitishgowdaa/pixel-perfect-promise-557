@@ -63,8 +63,8 @@ function useStored<T>(key: string, initial: T) {
 }
 
 function useSimState() {
-  const [campusId, setCampusId] = useStored<{ id: string }>("ss.campus", { id: CAMPUSES[0].id });
-  const base = CAMPUSES.find((c) => c.id === campusId.id) ?? CAMPUSES[0];
+  const [campusId, setCampusId] = useStored<{ id: string }>("ss.campus", { id: CAMPUSES[0]!.id });
+  const base = CAMPUSES.find((c) => c.id === campusId.id) ?? CAMPUSES[0]!;
   const [overrides, setOverrides] = useStored<Record<string, Partial<SimConfig>>>("ss.config", {});
   const config: SimConfig = useMemo(() => ({ ...base.config, ...(overrides[base.id] ?? {}) }), [base, overrides]);
   const [scenario, setScenario] = useState<Scenario>("clear");
@@ -93,9 +93,9 @@ function useSimState() {
     [config, scenario, date],
   );
 
-  const current = day.intervals[Math.min(step, STEPS_PER_DAY - 1)];
+  const current = day.intervals[Math.min(step, STEPS_PER_DAY - 1)]!;
   const fc = useMemo(
-    () => forecast(config, scenario, new Date(date.getTime() + 86400000), day.intervals[STEPS_PER_DAY - 1].soc),
+    () => forecast(config, scenario, new Date(date.getTime() + 86400000), day.intervals[STEPS_PER_DAY - 1]!.soc),
     [config, scenario, date, day],
   );
   const dateKey = dateKeyOf(date);
