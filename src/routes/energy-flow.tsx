@@ -81,7 +81,7 @@ function Flow() {
         <Stat label="Unallocated energy" value={`${fmt(Math.abs(unexplained), 3)} kWh`} sub={Math.abs(unexplained) < 0.01 ? "Balanced ✓" : "Check inputs"} />
       </div>
       <Card>
-        <CardTitle title="Daily energy allocation" subtitle={day.intervals[0].label + " – 24:00"} />
+        <CardTitle title="Daily energy allocation" subtitle={day.intervals[0]!.label + " – 24:00"} />
         <Sankey sources={sources} uses={uses} />
       </Card>
       <Card>

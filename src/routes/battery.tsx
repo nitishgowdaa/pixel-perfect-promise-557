@@ -41,7 +41,7 @@ function BatteryPage() {
   const minKwh = (config.battCapKwh * config.socMin) / 100;
   const usable = Math.max(0, c.storedKwh - minKwh) * (config.disEff / 100);
   const backup = backupHours(c.storedKwh, minKwh, config.disEff, c.loadKw);
-  const h = hourly(day.intervals, ["storedKwh", "chargeKw", "dischargeKw", "soc"]).map((r) => ({ ...r, dischargeNeg: -(r.dischargeKw as number) }));
+  const h = hourly(day.intervals, ["storedKwh", "chargeKw", "dischargeKw", "soc"]).map((r) => ({ ...r, dischargeNeg: -(r["dischargeKw"] as number) }));
   const timeline = day.intervals.filter((_, i) => i % 2 === 0);
 
   return (

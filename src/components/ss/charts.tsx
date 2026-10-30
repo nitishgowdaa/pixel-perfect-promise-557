@@ -54,7 +54,7 @@ export function TimeChart({
         tickLine={false}
         axisLine={false}
         width={56}
-        domain={yDomain}
+        domain={yDomain ?? ["auto", "auto"]}
         label={{ value: unit, angle: -90, position: "insideLeft", style: { ...axis, textAnchor: "middle" } }}
       />
       <Tooltip {...tip} formatter={(v: number) => `${v.toFixed(1)} ${unit}`} />
@@ -68,7 +68,7 @@ export function TimeChart({
           <BarChart data={data}>
             {common}
             {series.map((s) => (
-              <Bar key={s.key} dataKey={s.key} name={s.name} fill={s.color} stackId={s.stack} radius={s.stack ? 0 : [3, 3, 0, 0]} />
+              <Bar key={s.key} dataKey={s.key} name={s.name} fill={s.color} {...(s.stack ? { stackId: s.stack } : {})} radius={s.stack ? 0 : [3, 3, 0, 0]} />
             ))}
           </BarChart>
         ) : kind === "area" ? (
@@ -83,7 +83,7 @@ export function TimeChart({
                 fill={s.color}
                 fillOpacity={0.15}
                 strokeWidth={2}
-                stackId={s.stack}
+                {...(s.stack ? { stackId: s.stack } : {})}
                 strokeDasharray={s.dashed ? "5 4" : undefined}
                 dot={false}
                 isAnimationActive={false}
@@ -117,7 +117,7 @@ export function hourly<T extends { hour: number; day: number; label: string }>(r
   const out: Record<string, number | string>[] = [];
   for (let i = 0; i < rows.length; i += 4) {
     const chunk = rows.slice(i, i + 4);
-    const r: Record<string, number | string> = { label: chunk[0].label };
+    const r: Record<string, number | string> = { label: chunk[0]!.label };
     for (const k of keys) r[k as string] = chunk.reduce((a, c) => a + (c[k] as number), 0) / chunk.length;
     out.push(r);
   }

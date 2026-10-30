@@ -51,7 +51,7 @@ export function SimControls() {
         </SelectContent>
       </Select>
       <div className="flex min-w-48 flex-1 items-center gap-3">
-        <Slider value={[s.step]} min={0} max={STEPS_PER_DAY - 1} step={1} onValueChange={([v]) => s.setStep(v)} aria-label="Time of day" />
+        <Slider value={[s.step]} min={0} max={STEPS_PER_DAY - 1} step={1} onValueChange={([v]) => s.setStep(v ?? 0)} aria-label="Time of day" />
         <span className="tabular w-12 text-sm font-medium">{s.current.label}</span>
       </div>
     </div>
